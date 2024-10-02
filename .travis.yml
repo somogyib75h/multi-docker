@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t sb/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t somogyib75/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true sb/react-test npm test
+  - docker run -e CI=true somogyib75/react-test npm test
 
 after_success:
-  - docker build -t sb/multi-client ./client
-  - docker build -t sb/multi-nginx ./nginx
-  - docker build -t sb/multi-server ./server
-  - docker build -t sb/multi-worker ./worker
+  - docker build -t somogyib75/multi-client ./client
+  - docker build -t somogyib75/multi-nginx ./nginx
+  - docker build -t somogyib75/multi-server ./server
+  - docker build -t somogyib75/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push sb/multi-client
-  - docker push sb/multi-nginx
-  - docker push sb/multi-server
-  - docker push sb/multi-worker
+  - docker push somogyib75/multi-client
+  - docker push somogyib75/multi-nginx
+  - docker push somogyib75/multi-server
+  - docker push somogyib75/multi-worker
